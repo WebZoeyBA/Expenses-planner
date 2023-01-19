@@ -12,16 +12,17 @@ void main() {
       debugShowCheckedModeBanner: false,
       home: HomePage(),
       theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          accentColor: Colors.blueGrey,
-          fontFamily: 'Quicksand',
-          appBarTheme: AppBarTheme(
-            titleTextStyle: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Quicksand',
-                fontSize: 20,
-                fontWeight: FontWeight.w400),
-          )),
+        primarySwatch: Colors.deepPurple,
+        accentColor: Colors.blueGrey,
+        fontFamily: 'Quicksand',
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Quicksand',
+              fontSize: 20,
+              fontWeight: FontWeight.w400),
+        ),
+      ),
     ),
   );
 }

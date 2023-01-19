@@ -29,45 +29,28 @@ class InputFields extends StatelessWidget {
                 itemCount: transactions.length,
                 itemBuilder: (ctx, index) {
                   return Card(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              border:
-                                  Border.all(color: Colors.purple, width: 1)),
-                          margin: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 15.0),
-                          child: Text(
-                            'BAM ${transactions[index].amount.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColorLight,
+                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                    child: ListTile(
+                        leading: FittedBox(
+                          child: CircleAvatar(
+                            radius: 30,
+                            child: Padding(
+                              padding: EdgeInsets.all(6.0),
+                              child: Text(
+                                '\$${transactions[index].amount.toStringAsFixed(0)}',
+                              ),
                             ),
                           ),
                         ),
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${transactions[index].title}',
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              Text(
-                                DateFormat.yMMMd()
-                                    .format(transactions[index].date),
-                                style: TextStyle(
-                                    color: Colors.grey[650], fontSize: 16),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                        title: Text(
+                          '${transactions[index].title}',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        subtitle: Text(
+                          DateFormat.yMMMd().format(transactions[index].date),
+                          style:
+                              TextStyle(color: Colors.grey[650], fontSize: 16),
+                        )),
                   );
                 },
               ));
