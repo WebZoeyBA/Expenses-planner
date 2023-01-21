@@ -4,7 +4,8 @@ import 'package:intl/intl.dart';
 
 class InputFields extends StatelessWidget {
   final List<Transaction> transactions;
-  InputFields(this.transactions);
+  final Function deleteTx;
+  InputFields(this.transactions, this.deleteTx);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,26 +32,30 @@ class InputFields extends StatelessWidget {
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                     child: ListTile(
-                        leading: FittedBox(
-                          child: CircleAvatar(
-                            radius: 30,
-                            child: Padding(
-                              padding: EdgeInsets.all(6.0),
-                              child: Text(
-                                '\$${transactions[index].amount.toStringAsFixed(0)}',
-                              ),
+                      leading: FittedBox(
+                        child: CircleAvatar(
+                          radius: 30,
+                          child: Padding(
+                            padding: EdgeInsets.all(6.0),
+                            child: Text(
+                              '\$${transactions[index].amount.toStringAsFixed(0)}',
                             ),
                           ),
                         ),
-                        title: Text(
-                          '${transactions[index].title}',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        subtitle: Text(
-                          DateFormat.yMMMd().format(transactions[index].date),
-                          style:
-                              TextStyle(color: Colors.grey[650], fontSize: 16),
-                        )),
+                      ),
+                      title: Text(
+                        '${transactions[index].title}',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      subtitle: Text(
+                        DateFormat.yMMMd().format(transactions[index].date),
+                        style: TextStyle(color: Colors.grey[650], fontSize: 16),
+                      ),
+                      trailing: IconButton(
+                          color: Theme.of(context).errorColor,
+                          icon: Icon(Icons.delete),
+                          onPressed: (() => deleteTx(transactions[index].id))),
+                    ),
                   );
                 },
               ));

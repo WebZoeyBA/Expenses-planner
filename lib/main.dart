@@ -15,6 +15,7 @@ void main() {
         primarySwatch: Colors.deepPurple,
         accentColor: Colors.blueGrey,
         fontFamily: 'Quicksand',
+        errorColor: Colors.red,
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
               color: Colors.white,
@@ -47,12 +48,13 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
         id: DateTime.now().toString(),
         title: txTitle,
         amount: txAmount,
-        date: DateTime.now());
+        date: chosenDate);
     setState(() {
       _userTransactions.add(newTx);
     });
@@ -68,6 +70,14 @@ class _HomePageState extends State<HomePage> {
             behavior: HitTestBehavior.opaque,
           );
         });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) {
+        return tx.id == id;
+      });
+    });
   }
 
   @override
@@ -86,7 +96,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            InputFields(_userTransactions),
+            InputFields(_userTransactions, _deleteTransaction),
           ],
         ),
       ),
